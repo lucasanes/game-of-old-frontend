@@ -21,6 +21,7 @@ export const ContainerInput = styled('div', {
   background: darkTheme.colors.loContrast,
   border: '2px solid transparent',
   transition: 'ease-out .2s',
+  marginBottom: '2rem',
 
   variants: {
     active: {

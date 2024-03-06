@@ -22,7 +22,7 @@ export const { styled, css, keyframes, createTheme } = createStitches({
         animations: {
             linkHover: 'opacity(0.7)',
             buttonHover: 'opacity(0.7)',
-            buttonBackgroundHover: 'hsla(191, 100%, 30%, .3)'
+            buttonBackgroundHover: 'hsl(0, 0%, 76%)'
         }
     },
     media: {
@@ -55,6 +55,6 @@ export const darkTheme = createTheme({
     animations: {
         linkHover: 'brightness(1.5)',
         buttonHover: 'opacity(0.7)',
-        buttonBackgroundHover: 'hsla(182, 100%, 25%, .3)'
+        buttonBackgroundHover: 'hsl(0, 0%, 20%)'
     }
 })

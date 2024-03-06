@@ -19,6 +19,7 @@ export function ModalLogin({ setClose }: {setClose: () => void }) {
 
     if (!emailRegex.test(email)) {
       toast.error('Insira um e-mail válido.')
+      return
     }
 
     try {

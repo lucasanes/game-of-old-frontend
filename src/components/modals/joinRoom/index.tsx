@@ -1,20 +1,40 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { Input } from '../../input';
 import { Button, Container, Footer } from './styles'
 // import { api } from '../../../services/api';
 import { toast } from 'react-toastify';
 import { IoLockClosedOutline } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
+import { InputOTP } from '../../inputOTP';
 
-export function ModalJoinRoom({ setClose }: {setClose: () => void }) {
+interface Type {
+  [key: number]: string
+}
 
-  const [code, setCode] = useState('')
+export function ModalJoinRoom({ setClose }: { setClose: () => void }) {
+
+  const [inputs, setInputs] = useState<Type>({
+    0: '',
+    1: '',
+    2: '',
+    3: '',
+    4: '',
+    5: '',
+  })
 
   const navigate = useNavigate()
 
-  async function createCategory(e: FormEvent) {
+  useEffect(() => {
 
-    e.preventDefault()
+    const code = Object.values(inputs)
+
+    if (code.join('').length == 6) {
+      createCategory(code.join(''))
+    }
+
+  }, [inputs])
+
+  async function createCategory(code: string) {
 
     try {
 
@@ -32,13 +52,11 @@ export function ModalJoinRoom({ setClose }: {setClose: () => void }) {
 
   return (
     <Container>
-      <form onSubmit={createCategory}>
+      <form>
 
         <h1>Join Room</h1>
 
-        <Input label='Código' name='code' valor={code} setValor={setCode} minLength={6} maxLength={6} required>
-          <IoLockClosedOutline size={18} />
-        </Input>
+        <InputOTP inputs={inputs} setInputs={setInputs} />
 
         <Footer>
           <Button type='button' onClick={setClose}>Cancelar</Button>

@@ -9,12 +9,12 @@ export function ToggleTheme({ ...rest }) {
 
   function handleToggle() {
     setTheme(theme == 'light' ? 'dark' : 'light')
-    localStorage.setItem("@cardapiosadmin:theme", theme == 'light' ? 'dark' : 'light')
+    localStorage.setItem("@gameofold:theme", theme == 'light' ? 'dark' : 'light')
   }
 
   return (
     <Container {...rest}>
-      <Input defaultChecked={localStorage.getItem("@cardapiosadmin:theme") == 'dark'} type="checkbox" id="darkmode-toggle" onChange={handleToggle} />
+      <Input defaultChecked={localStorage.getItem("@gameofold:theme") == 'dark'} type="checkbox" id="darkmode-toggle" onChange={handleToggle} />
       <Label checked={theme == 'dark'} htmlFor="darkmode-toggle">
         <PiSunHorizonLight color={theme == 'light' ? "#fff" : '#7e7e7e'} size={24} version='1.1' className='sun' />
         <RxMoon color={theme == 'dark' ? "#fff" : '#7e7e7e'} size={22} version='1.1' className='moon' />

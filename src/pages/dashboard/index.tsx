@@ -3,6 +3,7 @@ import * as S from './styles'
 import { Modal } from '../../components/modal';
 import { ModalLogin } from '../../components/modals/modalLogin';
 import { ModalJoinRoom } from '../../components/modals/joinRoom';
+import { ToggleTheme } from '../../components/toggleTheme';
 
 export function Dashboard() {
 
@@ -29,12 +30,14 @@ export function Dashboard() {
     <S.Container>
       <S.Body>
 
-        <Modal isOpen={modalLoginIsOpen} setOpen={() => {}}>
-          <ModalLogin setClose={() => setModalLoginIsOpen(false)}/>
+        <ToggleTheme style={{ position: 'absolute', top: 5, left: 20 }} />
+
+        <Modal isOpen={modalLoginIsOpen} setOpen={() => { }}>
+          <ModalLogin setClose={() => setModalLoginIsOpen(false)} />
         </Modal>
 
         <Modal isOpen={modalJoinIsOpen} setOpen={() => setModalJoinIsOpen(false)}>
-          <ModalJoinRoom setClose={() => setModalJoinIsOpen(false)}/>
+          <ModalJoinRoom setClose={() => setModalJoinIsOpen(false)} />
         </Modal>
 
         <S.Button onClick={createRoom}>Criar Sala</S.Button>

@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { Input } from '../../input';
 import { Button, Container, Footer } from './styles'
-import { api } from '../../../services/api';
+// import { api } from '../../../services/api';
 import { toast } from 'react-toastify';
 import { MdOutlineEmail } from "react-icons/md";
 import { FaRegUserCircle } from "react-icons/fa";

@@ -1,23 +1,23 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState } from "react";
-import { ThemeContextProps } from "./types.js";
 import { darkTheme } from "../../stitches.config.js";
+import { ThemeContextProps } from "./types.js";
 
 const ThemeContext = createContext<ThemeContextProps>({} as ThemeContextProps);
 
 function ThemeProvider({ children }: { children: React.ReactNode }) {
-
-  const [theme, setTheme] = useState(localStorage.getItem('@gameofold:theme') || 'dark');
+  const [theme, setTheme] = useState(
+    localStorage.getItem("@gameofold:theme") || "dark"
+  );
 
   return (
     <ThemeContext.Provider
       value={{
         theme,
-        setTheme
+        setTheme,
       }}
     >
-      <div className={theme == 'dark' ? darkTheme : ''}>
-        {children}
-      </div>
+      <div className={theme == "dark" ? darkTheme : ""}>{children}</div>
     </ThemeContext.Provider>
   );
 }
@@ -28,4 +28,4 @@ function useTheme() {
   return context;
 }
 
-export { ThemeProvider, useTheme, ThemeContext };
+export { ThemeContext, ThemeProvider, useTheme };

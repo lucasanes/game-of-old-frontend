@@ -1,13 +1,15 @@
 import { Route, Routes } from "react-router-dom";
 import { Dashboard } from "../pages/dashboard";
-import { Game } from "../pages/game";
+import { Local } from "../pages/local";
 import { NotFound } from "../pages/notFound";
+import { Room } from "../pages/room";
 
 export function UserRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Dashboard />} />
-      <Route path="/room/:id" element={<Game />} />
+      <Route path="/local" element={<Local />} />
+      <Route path="/room/:id" element={<Room />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

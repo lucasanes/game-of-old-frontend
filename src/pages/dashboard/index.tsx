@@ -22,6 +22,16 @@ export function Dashboard() {
     }, 200);
   }, []);
 
+  function local() {
+    try {
+      navigate("/local");
+    } catch (e) {
+      const error = e as BackError;
+      toast.error(error.message);
+      console.log(error);
+    }
+  }
+
   function createRoom() {
     try {
       // const response = await api.post('/create-room')
@@ -42,7 +52,7 @@ export function Dashboard() {
   return (
     <S.Container>
       <S.Body>
-        <ToggleTheme style={{ position: "absolute", top: 5, left: 20 }} />
+        <ToggleTheme style={{ position: "absolute", top: 20, left: 30 }} />
 
         <Modal
           isOpen={modalLoginIsOpen}
@@ -60,9 +70,11 @@ export function Dashboard() {
           <ModalJoinRoom setClose={() => setModalJoinIsOpen(false)} />
         </Modal>
 
-        <S.Button onClick={createRoom}>Criar Sala</S.Button>
+        <S.Button onClick={createRoom}>Create Room</S.Button>
 
-        <S.Button onClick={joinRoom}>Entrar Em Uma Sala</S.Button>
+        <S.Button onClick={joinRoom}>Join Room</S.Button>
+
+        <S.Button onClick={local}>Local</S.Button>
       </S.Body>
     </S.Container>
   );

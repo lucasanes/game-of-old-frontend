@@ -1,9 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { Quit } from "../../components/quit";
+import { playSoundO, playSoundX } from "../../components/sound";
 import { ToggleTheme } from "../../components/toggleTheme";
 import * as S from "./styles";
 
-export function Game() {
+export function Local() {
   const initialBoard = Array(9).fill(null);
 
   const [board, setBoard] = useState<(null | string)[]>(initialBoard);
@@ -19,6 +24,12 @@ export function Game() {
 
     checkWinner(newBoard);
     setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
+
+    if (currentPlayer === "X") {
+      playSoundO();
+    } else {
+      playSoundX();
+    }
   };
 
   const checkWinner = (currentBoard: (null | string)[]) => {
@@ -41,11 +52,13 @@ export function Game() {
         currentBoard[a] === currentBoard[c]
       ) {
         setWinner(currentPlayer);
+        toast(`Winner: ${currentPlayer}`);
       }
     }
 
     if (!currentBoard.includes(null)) {
       setWinner("Tie");
+      toast("Result: Tie");
     }
   };
 
@@ -58,15 +71,21 @@ export function Game() {
   };
 
   const resetGame = () => {
+    if (!board.includes("X") && !board.includes("O")) {
+      return;
+    }
     setBoard(initialBoard);
     setCurrentPlayer("X");
     setWinner(null);
+    toast("Reseted Game");
   };
 
   return (
     <S.Container>
-      <ToggleTheme style={{ position: "absolute", top: 5, left: 20 }} />
-      <Quit style={{ position: "absolute", top: 5, right: 20 }} />
+      <S.Header>
+        <ToggleTheme />
+        <Quit />
+      </S.Header>
 
       <S.Game>{board.map((_, index) => renderSquare(index))}</S.Game>
       <S.Status>

@@ -11,6 +11,55 @@ export const Container = styled("div", {
   background: darkTheme.colors.body,
 });
 
+export const Header = styled("div", {
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  position: "absolute",
+  top: 20,
+  padding: "0 3rem",
+
+  "@md": {
+    display: "grid",
+    gridTemplateAreas: `
+      "toggleTheme . quit"
+      "code code code"
+    `,
+    gridTemplateColumns: "auto 1fr auto",
+    alignItems: "center",
+    justifyContent: "center",
+
+    ".code": {
+      marginTop: "7rem",
+    },
+  },
+
+  ".code": {
+    gridArea: "code",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "1rem",
+    color: darkTheme.colors.hiContrast,
+
+    h1: {
+      fontSize: "2rem",
+    },
+
+    button: {
+      background: "none",
+      border: "none",
+      color: darkTheme.colors.hiContrast,
+      transition: ".3s",
+
+      "&:hover": {
+        opacity: 0.6,
+      },
+    },
+  },
+});
+
 export const Game = styled("div", {
   width: "100%",
   justifyContent: "center",

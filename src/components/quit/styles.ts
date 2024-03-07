@@ -1,16 +1,21 @@
 import { darkTheme, styled } from "../../stitches.config";
 
 export const Container = styled("div", {
-  marginTop: "1rem",
+  width: "8rem",
+  height: "4rem",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "end",
+  gridArea: "quit",
 });
 
 export const Button = styled("button", {
   background: "none",
   border: "none",
-  color: darkTheme.colors.midContrast,
+  color: darkTheme.colors.hiContrast,
   transition: ".3s",
 
   "&:hover": {
-    color: darkTheme.colors.hiContrast,
+    opacity: 0.6,
   },
 });

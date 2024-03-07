@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { Modal } from "../../components/modal";
 import { ModalJoinRoom } from "../../components/modals/joinRoom";
 import { ModalLogin } from "../../components/modals/modalLogin";
+import { buttonSound } from "../../components/sound";
 import { ToggleTheme } from "../../components/toggleTheme";
 import { BackError } from "../../types/error-back";
 import * as S from "./styles";
@@ -24,6 +25,7 @@ export function Dashboard() {
 
   function local() {
     try {
+      buttonSound();
       navigate("/local");
     } catch (e) {
       const error = e as BackError;
@@ -37,6 +39,7 @@ export function Dashboard() {
       // const response = await api.post('/create-room')
       // console.log(response.data)
 
+      buttonSound();
       navigate(`/room/${"123123"}`);
     } catch (e) {
       const error = e as BackError;
@@ -46,6 +49,7 @@ export function Dashboard() {
   }
 
   function joinRoom() {
+    buttonSound();
     setModalJoinIsOpen(true);
   }
 

@@ -67,8 +67,16 @@ export const Button = styled("button", {
   fontSize: "16px",
   borderRadius: ".5rem",
   transition: ".3s",
+  cursor: "default",
 
-  "&:hover": {
-    background: darkTheme.animations.buttonBackgroundHover,
+  variants: {
+    null: {
+      false: {
+        "&:hover": {
+          background: darkTheme.animations.buttonBackgroundHover,
+          cursor: "pointer",
+        },
+      },
+    },
   },
 });

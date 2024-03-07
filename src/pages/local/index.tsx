@@ -2,9 +2,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { useState } from "react";
-import { toast } from "react-toastify";
 import { Quit } from "../../components/quit";
-import { playSoundO, playSoundX, winSound } from "../../components/sound";
+import {
+  playSoundO,
+  playSoundX,
+  reverseSound,
+  winSound,
+} from "../../components/sound";
 import { ToggleTheme } from "../../components/toggleTheme";
 import * as S from "./styles";
 
@@ -53,14 +57,12 @@ export function Local() {
       ) {
         winSound();
         setWinner(currentPlayer);
-        toast(`Winner: ${currentPlayer}`);
         return;
       }
     }
 
     if (!currentBoard.includes(null)) {
       setWinner("Tie");
-      toast("Result: Tie");
     }
   };
 
@@ -79,10 +81,10 @@ export function Local() {
     if (!board.includes("X") && !board.includes("O")) {
       return;
     }
+    reverseSound();
     setBoard(initialBoard);
     setCurrentPlayer("X");
     setWinner(null);
-    toast("Reseted Game");
   };
 
   return (
@@ -96,7 +98,12 @@ export function Local() {
       <S.Status>
         {winner ? `Winner: ${winner}` : `Next Player: ${currentPlayer}`}
       </S.Status>
-      <S.Button onClick={resetGame}>Reset Game</S.Button>
+      <S.Button
+        null={!board.includes("X") && !board.includes("O")}
+        onClick={resetGame}
+      >
+        Reset Game
+      </S.Button>
     </S.Container>
   );
 }

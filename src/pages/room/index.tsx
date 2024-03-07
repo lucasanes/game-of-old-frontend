@@ -1,24 +1,30 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { useState } from "react";
 import { FaRegCopy } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Quit } from "../../components/quit";
-import { playSoundO, playSoundX } from "../../components/sound";
+import {
+  playSoundO,
+  playSoundX,
+  reverseSound,
+  winSound,
+} from "../../components/sound";
 import { ToggleTheme } from "../../components/toggleTheme";
 import * as S from "./styles";
 
 export function Room() {
   const initialBoard = Array(9).fill(null);
 
+  const { id } = useParams();
+
   const [board, setBoard] = useState<(null | string)[]>(initialBoard);
   const [currentPlayer, setCurrentPlayer] = useState("X");
   const [winner, setWinner] = useState<string | null>(null);
-
-  const { id } = useParams();
 
   const handleClick = (index: number) => {
     if (board[index] || winner) return;
@@ -31,9 +37,9 @@ export function Room() {
     setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
 
     if (currentPlayer === "X") {
-      playSoundO();
-    } else {
       playSoundX();
+    } else {
+      playSoundO();
     }
   };
 
@@ -56,7 +62,9 @@ export function Room() {
         currentBoard[a] === currentBoard[b] &&
         currentBoard[a] === currentBoard[c]
       ) {
+        winSound();
         setWinner(currentPlayer);
+        return;
       }
     }
 
@@ -67,22 +75,29 @@ export function Room() {
 
   const renderSquare = (index: number) => {
     return (
-      <div className="square" onClick={() => handleClick(index)}>
+      <div
+        className={board[index] ? "square" : "square null"}
+        onClick={() => handleClick(index)}
+      >
         {board[index]}
       </div>
     );
   };
 
   const resetGame = () => {
+    if (!board.includes("X") && !board.includes("O")) {
+      return;
+    }
+    reverseSound();
     setBoard(initialBoard);
     setCurrentPlayer("X");
     setWinner(null);
   };
 
-  async function copy(code: string) {
+  async function copy() {
     try {
-      await navigator.clipboard.writeText(`${code}`);
-      toast.success(`Código copiado: ${code}`);
+      await navigator.clipboard.writeText(`${id}`);
+      toast(`Código copiado: ${id}`);
     } catch (err) {
       console.error("Erro ao copiar para a área de transferência:", err);
     }
@@ -95,7 +110,7 @@ export function Room() {
 
         <div className="code">
           <h1>Código: {id}</h1>
-          <button onClick={() => id && copy(id)}>
+          <button onClick={copy}>
             <FaRegCopy size={20} />
           </button>
         </div>
@@ -107,7 +122,12 @@ export function Room() {
       <S.Status>
         {winner ? `Winner: ${winner}` : `Next Player: ${currentPlayer}`}
       </S.Status>
-      <S.Button onClick={resetGame}>Reset Game</S.Button>
+      <S.Button
+        null={!board.includes("X") && !board.includes("O")}
+        onClick={resetGame}
+      >
+        Reset Game
+      </S.Button>
     </S.Container>
   );
 }

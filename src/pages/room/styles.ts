@@ -1,16 +1,6 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { darkTheme, styled } from "../../stitches.config";
 
-export const Container = styled("div", {
-  width: "100vw",
-  height: "100vh",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  background: darkTheme.colors.body,
-});
-
 export const Header = styled("div", {
   width: "100%",
   display: "flex",
@@ -60,6 +50,16 @@ export const Header = styled("div", {
   },
 });
 
+export const Container = styled("div", {
+  width: "100vw",
+  height: "100vh",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  background: darkTheme.colors.body,
+});
+
 export const Game = styled("div", {
   width: "100%",
   justifyContent: "center",
@@ -75,14 +75,15 @@ export const Game = styled("div", {
     justifyContent: "center",
     alignItems: "center",
     fontSize: "24px",
-    cursor: "pointer",
+    cursor: "default",
     color: darkTheme.colors.hiContrast,
     borderRadius: ".5rem",
     transition: ".3s",
   },
 
-  ".square:hover": {
+  ".null:hover": {
     backgroundColor: darkTheme.animations.buttonBackgroundHover,
+    cursor: "pointer",
   },
 });
 
@@ -105,8 +106,16 @@ export const Button = styled("button", {
   fontSize: "16px",
   borderRadius: ".5rem",
   transition: ".3s",
+  cursor: "default",
 
-  "&:hover": {
-    background: darkTheme.animations.buttonBackgroundHover,
+  variants: {
+    null: {
+      false: {
+        "&:hover": {
+          background: darkTheme.animations.buttonBackgroundHover,
+          cursor: "pointer",
+        },
+      },
+    },
   },
 });

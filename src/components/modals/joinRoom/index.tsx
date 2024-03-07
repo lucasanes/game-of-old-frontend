@@ -38,10 +38,11 @@ export function ModalJoinRoom({ setClose }: { setClose: () => void }) {
   );
 
   useEffect(() => {
-    const code = Object.values(inputs);
+    const codeArray = Object.values(inputs);
+    const code = codeArray.join("");
 
-    if (code.join("").length == 6) {
-      createCategory(code.join(""));
+    if (code.length == 6) {
+      createCategory(code);
     }
   }, [createCategory, inputs]);
 

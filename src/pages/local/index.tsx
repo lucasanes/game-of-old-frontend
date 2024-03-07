@@ -4,7 +4,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Quit } from "../../components/quit";
-import { playSoundO, playSoundX } from "../../components/sound";
+import { playSoundO, playSoundX, winSound } from "../../components/sound";
 import { ToggleTheme } from "../../components/toggleTheme";
 import * as S from "./styles";
 
@@ -26,9 +26,9 @@ export function Local() {
     setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
 
     if (currentPlayer === "X") {
-      playSoundO();
-    } else {
       playSoundX();
+    } else {
+      playSoundO();
     }
   };
 
@@ -51,8 +51,10 @@ export function Local() {
         currentBoard[a] === currentBoard[b] &&
         currentBoard[a] === currentBoard[c]
       ) {
+        winSound();
         setWinner(currentPlayer);
         toast(`Winner: ${currentPlayer}`);
+        return;
       }
     }
 
@@ -64,7 +66,10 @@ export function Local() {
 
   const renderSquare = (index: number) => {
     return (
-      <div className="square" onClick={() => handleClick(index)}>
+      <div
+        className={board[index] ? "square" : "square null"}
+        onClick={() => handleClick(index)}
+      >
         {board[index]}
       </div>
     );

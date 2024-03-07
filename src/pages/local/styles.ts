@@ -36,14 +36,15 @@ export const Game = styled("div", {
     justifyContent: "center",
     alignItems: "center",
     fontSize: "24px",
-    cursor: "pointer",
+    cursor: "default",
     color: darkTheme.colors.hiContrast,
     borderRadius: ".5rem",
     transition: ".3s",
   },
 
-  ".square:hover": {
+  ".null:hover": {
     backgroundColor: darkTheme.animations.buttonBackgroundHover,
+    cursor: "pointer",
   },
 });
 

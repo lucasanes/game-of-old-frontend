@@ -1,30 +1,37 @@
 import { Howl } from "howler";
-import playSoundMP3 from "../../assets/chalk.mp3";
+import toggleSoundMP3 from "../../assets/button.wav";
+import oPlaySoundMP3 from "../../assets/playSoundO.mp3";
+import xPlaySoundMP3 from "../../assets/playSoundX.mp3";
+import winSoundMP3 from "../../assets/win.mp3";
 
 export const playSoundX = () => {
-  interface SoundConfig {
-    src: string[];
-  }
-
-  const soundConfig: SoundConfig = {
-    src: [playSoundMP3],
-  };
-
-  const sound: Howl = new Howl(soundConfig);
+  const sound: Howl = new Howl({
+    src: [xPlaySoundMP3],
+  });
 
   sound.play();
 };
 
 export const playSoundO = () => {
-  interface SoundConfig {
-    src: string[];
-  }
+  const sound: Howl = new Howl({
+    src: [oPlaySoundMP3],
+  });
 
-  const soundConfig: SoundConfig = {
-    src: [playSoundMP3],
-  };
+  sound.play();
+};
 
-  const sound: Howl = new Howl(soundConfig);
+export const toggleSound = () => {
+  const sound: Howl = new Howl({
+    src: [toggleSoundMP3],
+  });
+
+  sound.play();
+};
+
+export const winSound = () => {
+  const sound: Howl = new Howl({
+    src: [winSoundMP3],
+  });
 
   sound.play();
 };

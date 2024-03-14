@@ -8,6 +8,8 @@ import { buttonSound } from "../../components/sound";
 import { ToggleTheme } from "../../components/toggleTheme";
 import { BackError } from "../../types/error-back";
 import * as S from "./styles";
+import { AxiosResponse } from "axios";
+import { api } from "../../services/api";
 
 export function Dashboard() {
   const [modalLoginIsOpen, setModalLoginIsOpen] = useState(false);
@@ -35,17 +37,19 @@ export function Dashboard() {
   }
 
   function createRoom() {
-    try {
-      // const response = await api.post('/create-room')
-      // console.log(response.data)
+    api
+      .post<AxiosResponse<{ code: string }>>("/room", {})
+      .then((response) => {
+        console.log(response.data);
 
-      buttonSound();
-      navigate(`/room/${"123123"}`);
-    } catch (e) {
-      const error = e as BackError;
-      toast.error(error.message);
-      console.log(error);
-    }
+        buttonSound();
+        navigate(`/room/${"123123"}`);
+      })
+      .catch((e) => {
+        const error = e as BackError;
+        toast.error(error.message);
+        console.log(error);
+      });
   }
 
   function joinRoom() {

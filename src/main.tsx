@@ -1,14 +1,17 @@
-import ReactDOM from 'react-dom/client'
-import { GlobalStyles } from './styles/global'
-import { Routes } from './routes'
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify'
-import { ThemeProvider } from './contexts/theme';
+import ReactDOM from "react-dom/client";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { AuthProvider } from "./contexts/auth";
+import { ThemeProvider } from "./contexts/theme";
+import { Routes } from "./routes";
+import { GlobalStyles } from "./styles/global";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <ThemeProvider>
-    <GlobalStyles />
-    <Routes />
-    <ToastContainer />
-  </ThemeProvider>
-)
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <AuthProvider>
+    <ThemeProvider>
+      <GlobalStyles />
+      <Routes />
+      <ToastContainer />
+    </ThemeProvider>
+  </AuthProvider>
+);
